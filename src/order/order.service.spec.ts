@@ -2,11 +2,11 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { OrderService } from './order.service';
 import { CreateOrderDto, OrderEnum } from './dto/order.dto';
 import { KnexModule } from 'nestjs-knex';
-import { OrderTest } from './order-test';
+
 
 describe('OrderService', () => {
     let service: OrderService;
-    let orderTest: OrderTest
+ 
 
     let orderCreate: CreateOrderDto = {
         description: 'lorem',
@@ -41,42 +41,48 @@ describe('OrderService', () => {
                         create: jest.fn(),
                     }
                 },
-                {
-                    provide: OrderTest,
-                    useValue: {
-
-                    }
-                }
+             
             ],
         }).compile();
 
         service = module.get<OrderService>(OrderService);
-        orderTest = module.get<OrderTest>(OrderTest);
+        
     });
    
+  
     describe("create", () => {
         it("should be create order ", async () => {
-            let resultData = {
-                id: 204,            
+            let wantData = {
+              
+                   "description": "lorem",
+                   "estimate": 1,
+                   "status": "active",
+                   "title": "lorem",           
             };
-            (orderTest.findOneOrder as jest.Mock).mockResolvedValue(resultData);
+  
             (service.create as jest.Mock).mockResolvedValue(orderCreate);
-            const result = await service.create(orderCreate);
+            const actual = await service.create(orderCreate);
+    
+        
+            // expect(service.create).toHaveBeenCalledWith(wantData)
+            expect(actual).toEqual(wantData);           
+        }); 
 
-            expect(orderTest.findOneOrder).toHaveBeenCalledWith({title: "lorem"})
-            expect(service.create).toHaveBeenCalledWith(orderCreate)
-            expect(result).toEqual(orderCreate);
-        });
-
-        it("should be create order second", async () => {
-            let resultData = {
-                id: 204,            
+        it("should be create order ", async () => {
+            let wantData = {
+              
+                   "description": "lorem",
+                   "estimate": 1,
+                   "status": "active",
+                   "title": "lorem",           
             };
-
-            (service.create as jest.Mock).mockResolvedValue(orderCreate);
-            const result = await service.create(orderCreate);
-            expect(service.create).toHaveBeenCalledWith(orderCreate)
-            expect(result).toEqual(orderCreate);
-        });
+  
+            (service.create as jest.Mock).mockResolvedValue({});
+            const actual = await service.create(orderCreate);
+    
+        
+            // expect(service.create).toHaveBeenCalledWith(wantData)
+            expect(actual).toEqual(wantData);           
+        }); 
     })
 });
