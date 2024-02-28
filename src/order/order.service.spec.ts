@@ -63,58 +63,58 @@ describe('OrderService', () => {
           });
      })
 
-    // describe("update",()=>{
-    //     it('should update the input value by id', async () => {
-    //         const expectedEntity = { id: 1, title: 'updated Entity' }
-    //         let orderUpdate: UpdateOrderDto = {
-    //             title: 'lorem',
-    //             description: 'lorem',
-    //             status: OrderEnum.ACTIVE,
-    //             estimate: 1,
-    //         };
-    //         // Mock service behavior
-    //         (service.update as jest.Mock).mockResolvedValue(expectedEntity);
+    describe("update",()=>{
+        it('should update the input value by id', async () => {
+            const expectedEntity = { id: 1, title: 'updated Entity' }
+            let orderUpdate: UpdateOrderDto = {
+                title: 'lorem',
+                description: 'lorem',
+                status: OrderEnum.ACTIVE,
+                estimate: 1,
+            };
+            // Mock service behavior
+            (service.update as jest.Mock).mockResolvedValue(expectedEntity);
             
         
-    //         const result = await service.update(1,orderUpdate);
+            const result = await service.update(1,orderUpdate);
         
-    //         expect(service.update).toHaveBeenCalledWith(1,orderUpdate);
-    //         expect(result).toEqual(expectedEntity);
-    //       });
-    //  })
+            expect(service.update).toHaveBeenCalledWith(1,orderUpdate);
+            expect(result).toEqual(expectedEntity);
+          });
+     })
 
-//  describe("findById",()=>{
-//     it('should return the found entity by id', async () => {
-//         const expectedEntity = { id: 2, title: 'Test Entity' };
-//         // Mock service behavior
-//         (service.findById as jest.Mock).mockResolvedValue(expectedEntity);
+ describe("findById",()=>{
+    it('should return the found entity by id', async () => {
+        const expectedEntity = { id: 2, title: 'Test Entity' };
+        // Mock service behavior
+        (service.findById as jest.Mock).mockResolvedValue(expectedEntity);
         
     
-//         const result = await service.findById(1);
+        const result = await service.findById(1);
     
-//         expect(service.findById).toHaveBeenCalledWith(1);
-//         expect(result).toEqual(expectedEntity);
-//       });
-//  })
+        expect(service.findById).toHaveBeenCalledWith(1);
+        expect(result).toEqual(expectedEntity);
+      });
+ })
   
-    // describe("create", () => {
-    //     it("should be create order ", async () => {
-    //         let orderCreate: CreateOrderDto = {
-    //             description: 'lorem',
-    //             estimate: 1,
-    //             status: OrderEnum.ACTIVE,
-    //             title: 'lorem',
-    //         }
-    //         let expectedEntity = {
-    //             id:2          
-    //         };
+    describe("create", () => {
+        it("should be create order ", async () => {
+            let orderCreate: CreateOrderDto = {
+                description: 'lorem',
+                estimate: 1,
+                status: OrderEnum.ACTIVE,
+                title: 'lorem',
+            }
+            let expectedEntity = {
+                id:2          
+            };
   
-    //         (service.create as jest.Mock).mockResolvedValue(expectedEntity);
-    //         const result = await service.create(orderCreate);
-    //         expect(service.create).toHaveBeenCalledWith(orderCreate)
-    //         expect(result).toEqual(expectedEntity);           
-    //     }); 
+            (service.create as jest.Mock).mockResolvedValue(expectedEntity);
+            const result = await service.create(orderCreate);
+            expect(service.create).toHaveBeenCalledWith(orderCreate)
+            expect(result).toEqual(expectedEntity);           
+        }); 
 
       
-    // })
+    })
 });
