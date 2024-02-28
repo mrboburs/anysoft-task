@@ -3,7 +3,7 @@ import { OrderService } from './order.service';
 import { CreateOrderDto, OrderEnum, UpdateOrderDto } from './dto/order.dto';
 import { KnexModule } from 'nestjs-knex';
 import { OrderController } from './order.controller';
-// Mock the service
+
 
 
 describe('OrderService', () => {

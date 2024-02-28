@@ -1,8 +1,8 @@
-// src/user/user.controller.ts
+
 import { Controller, Get, Post, Put, Delete, Param, Body, ParseIntPipe } from '@nestjs/common';
 import { OrderService } from './order.service';
 import { CreateOrderDto, GetOrderDto, UpdateOrderDto } from './dto/order.dto';
-// import { IdValidationPipe } from 'src/shared/decorators/id-validation.decorator';
+
 
 @Controller('orders')
 export class OrderController {
