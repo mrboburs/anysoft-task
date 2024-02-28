@@ -13,14 +13,14 @@ export class OrderService {
     const [createdOrder] = await this.knex('orders').insert(order).returning('id');
     return createdOrder;
   }
-  
+
   async findAll() {
-    
+
     return this.knex('orders').select("*");
   }
 
   async findById(id: number): Promise<GetOrderDto> {
-  let res = this.knex.select().from<GetOrderDto>('orders').where({ id }).first();
+    let res = this.knex.select().from<GetOrderDto>('orders').where({ id }).first();
     return res
   }
 

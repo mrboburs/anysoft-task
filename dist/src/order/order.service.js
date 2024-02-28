@@ -16,18 +16,12 @@ exports.OrderService = void 0;
 const common_1 = require("@nestjs/common");
 const knex_1 = require("knex");
 const nestjs_knex_1 = require("nestjs-knex");
-const order_test_1 = require("./order-test");
 let OrderService = class OrderService {
-    constructor(knex, orderTest) {
+    constructor(knex) {
         this.knex = knex;
-        this.orderTest = orderTest;
     }
     async create(order) {
-        const hasOrder = await this.orderTest.findOneOrder({ title: order.title });
-        if (hasOrder) {
-            throw new common_1.ConflictException("This order already created");
-        }
-        const [createdOrder] = await this.knex('orders').insert(order).returning('title');
+        const [createdOrder] = await this.knex('orders').insert(order).returning('id');
         return createdOrder;
     }
     async findAll() {
@@ -49,6 +43,6 @@ exports.OrderService = OrderService;
 exports.OrderService = OrderService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, nestjs_knex_1.InjectKnex)()),
-    __metadata("design:paramtypes", [Function, order_test_1.OrderTest])
+    __metadata("design:paramtypes", [Function])
 ], OrderService);
 //# sourceMappingURL=order.service.js.map
