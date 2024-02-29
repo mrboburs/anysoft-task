@@ -1,14 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { OrderService } from './order.service';
-import { CreateOrderDto, OrderEnum, UpdateOrderDto } from './dto/order.dto';
+import { TaskService } from './task.service';
+import { CreateTaskDto, TaskEnum, UpdateTaskDto } from './dto/task.dto';
 import { KnexModule } from 'nestjs-knex';
-import { OrderController } from './order.controller';
+import { TaskController } from './task.controller';
 
 
 
-describe('OrderService', () => {
-    let service: OrderService;
-    let controller: OrderController;
+describe('TaskService', () => {
+    let service: TaskService;
+    let controller: TaskController;
  
 
    
@@ -33,7 +33,7 @@ describe('OrderService', () => {
                 }),
             ],
             providers: [
-                {provide: OrderService,
+                {provide: TaskService,
                     useValue: {
                         create: jest.fn(),
                         findById: jest.fn(),
@@ -45,7 +45,7 @@ describe('OrderService', () => {
             ],
         }).compile();
 
-        service = module.get<OrderService>(OrderService);
+        service = module.get<TaskService>(TaskService);
         
     });
   describe("delete",()=>{
@@ -66,19 +66,20 @@ describe('OrderService', () => {
     describe("update",()=>{
         it('should update the input value by id', async () => {
             const expectedEntity = { id: 1, title: 'updated Entity' }
-            let orderUpdate: UpdateOrderDto = {
+            let TaskUpdate: UpdateTaskDto = {
+                order_id:2,
                 title: 'lorem',
                 description: 'lorem',
-                status: OrderEnum.ACTIVE,
+                status: TaskEnum.ACTIVE,
                 estimate: 1,
             };
             // Mock service behavior
             (service.update as jest.Mock).mockResolvedValue(expectedEntity);
             
         
-            const result = await service.update(1,orderUpdate);
+            const result = await service.update(1,TaskUpdate);
         
-            expect(service.update).toHaveBeenCalledWith(1,orderUpdate);
+            expect(service.update).toHaveBeenCalledWith(1,TaskUpdate);
             expect(result).toEqual(expectedEntity);
           });
      })
@@ -98,11 +99,12 @@ describe('OrderService', () => {
  })
   
     describe("create", () => {
-        it("should be create order ", async () => {
-            let orderCreate: CreateOrderDto = {
+        it("should be create Task ", async () => {
+            let TaskCreate: CreateTaskDto = {
+                order_id:2,
                 description: 'lorem',
                 estimate: 1,
-                status: OrderEnum.ACTIVE,
+                status: TaskEnum.ACTIVE,
                 title: 'lorem',
             }
             let expectedEntity = {
@@ -110,8 +112,8 @@ describe('OrderService', () => {
             };
   
             (service.create as jest.Mock).mockResolvedValue(expectedEntity);
-            const result = await service.create(orderCreate);
-            expect(service.create).toHaveBeenCalledWith(orderCreate)
+            const result = await service.create(TaskCreate);
+            expect(service.create).toHaveBeenCalledWith(TaskCreate)
             expect(result).toEqual(expectedEntity);           
         }); 
 

@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
-import { OrderModule } from './order/order.module';
+import { TaskModule } from './task/task.module';
 import { SharedModule } from './shared/shared.module';
 
 
 @Module({
   imports: [
     SharedModule,
-    OrderModule,
+    TaskModule,
    
   ],
 })

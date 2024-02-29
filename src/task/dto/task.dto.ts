@@ -1,39 +1,45 @@
 import { IsNotEmpty, IsNumber, IsString, IsEnum } from "class-validator";
 
-export enum OrderEnum {
+export enum TaskEnum {
     ACTIVE = 'active',
     INACTIVE = 'inactive',
     DELETED = 'deleted',
   }
 
-export class CreateOrderDto {
+export class CreateTaskDto {
+    @IsNotEmpty()
+    @IsNumber()
+    order_id:number;
     @IsNotEmpty()
     @IsString()
     title: string;
     @IsString()
     description: string;
-    @IsEnum(OrderEnum)
-    status: OrderEnum;
+    @IsEnum(TaskEnum)
+    status: TaskEnum;
     estimate:number;
 }
 
-export class GetOrderDto {
+export class GetTaskDto {
     id:number;
+    order_id:number;
     title: string;
     description: string;
-    status: OrderEnum;
+    status: TaskEnum;
     estimate:number;
     created_at:Date;
 
 }
-export class UpdateOrderDto {  
-   
+export class UpdateTaskDto {  
+    
+    @IsNumber()
+    order_id:number;
     @IsString()
     title: string;
     @IsString()
     description: string;
-    @IsEnum(OrderEnum)
-    status: OrderEnum;
+    @IsEnum(TaskEnum)
+    status: TaskEnum;
     @IsNumber()
     estimate:number;
 }
