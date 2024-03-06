@@ -1,13 +1,25 @@
-import { IsNotEmpty, IsNumber, IsString, IsEnum } from "class-validator";
+import { IsNotEmpty, IsNumber, IsString, IsEnum, } from "class-validator";
+import { Timestamp } from "typeorm";
 
-export enum TaskEnum {
-    ACTIVE = 'active',
-    INACTIVE = 'inactive',
-    DELETED = 'deleted',
+export class PaginationDto {
+    // @IsNumber()
+    // @Min(1)
+    page: number = 1;
+    // @IsNumber()
+    // @Min(1)
+    limit: number = 10;
+  }
+export enum StatusEnum {
+ 
+    ToDo = 'todo',
+    InProgress = 'in_progress',
+    Test ='test',
+    Done = 'done',
+    Cancelled='cancelled'
   }
 
 export class CreateTaskDto {
-    @IsNotEmpty()
+   
     @IsNumber()
     order_id:number;
     @IsNotEmpty()
@@ -15,9 +27,11 @@ export class CreateTaskDto {
     title: string;
     @IsString()
     description: string;
-    @IsEnum(TaskEnum)
-    status: TaskEnum;
-    estimate:number;
+    @IsEnum(StatusEnum)
+    status: StatusEnum;
+    @IsNotEmpty()
+   @IsString()
+    estimate:string;
 }
 
 export class GetTaskDto {
@@ -25,21 +39,15 @@ export class GetTaskDto {
     order_id:number;
     title: string;
     description: string;
-    status: TaskEnum;
-    estimate:number;
+    status: StatusEnum;
+    estimate:string;
     created_at:Date;
 
 }
 export class UpdateTaskDto {  
-    
-    @IsNumber()
     order_id:number;
-    @IsString()
     title: string;
-    @IsString()
     description: string;
-    @IsEnum(TaskEnum)
-    status: TaskEnum;
-    @IsNumber()
-    estimate:number;
+    status: StatusEnum;
+    estimate:string;
 }
